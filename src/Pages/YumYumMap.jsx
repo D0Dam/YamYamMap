@@ -1,7 +1,7 @@
 /*global kakao*/
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Map, MapMarker, getLat, getLng } from "react-kakao-maps-sdk";
+import { Map } from "react-kakao-maps-sdk";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import MapMarkerWrapper from "../components/MapMarkerWrapper";
@@ -88,6 +88,16 @@ const YumYumMap = () => {
 	);
 };
 
-const categories = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const categories = [
+	"전체",
+	"콜밴",
+	"도시락 & 떡볶이",
+	"족발",
+	"중식",
+	"치킨 & 찜닭",
+	"피자",
+	"미용실",
+	"한식",
+];
 
 export default YumYumMap;
