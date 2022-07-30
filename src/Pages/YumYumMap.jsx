@@ -5,12 +5,23 @@ import { Map, MapMarker, getLat, getLng } from "react-kakao-maps-sdk";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import MapMarkerWrapper from "../components/MapMarkerWrapper";
+import NavButtonWrapper from "../components/NavButtonWrapper";
+import YumItemWrapper from "../components/YumItemWrapper";
 
 const Navbar = styled.nav`
 	display: flex;
-	justify-content: space-between;
 	width: 100vw;
 	height: 5vh;
+`;
+
+const Home = styled.div`
+	width: 84px;
+`;
+
+const NavButtons = styled.span`
+	display: flex;
+	width: 100vw;
+	justify-content: space-around;
 `;
 
 const YumContainer = styled.div`
@@ -19,7 +30,7 @@ const YumContainer = styled.div`
 `;
 
 const YumList = styled.div`
-	width: 25vw;
+	width: 35vw;
 `;
 
 const YumYumMap = () => {
@@ -28,23 +39,33 @@ const YumYumMap = () => {
 		lng: 127.2823112,
 	});
 	const [shopDatas, setShopDatas] = useState(null);
+	const [category, setCategory] = useState(0);
 	useEffect(() => {
 		axios.get(`https://api.koreatech.in/shops`).then((res) => {
 			setShopDatas(res.data.shops);
+			console.log(res.data.shops);
 		});
 	}, []);
 	return (
 		<div>
 			<Navbar>
-				<Link to="/">Go Home</Link>
-				<button>뭔가 기능</button>
-				<span>뭔가 기능 2</span>
+				<Home>
+					<Link to="/">Go Home</Link>
+				</Home>
+				<NavButtons>
+					<NavButtonWrapper categories={categories} setCategory={setCategory} />
+				</NavButtons>
 			</Navbar>
 			<YumContainer>
-				<YumList>여기에 음식점 리스트</YumList>
+				<YumList>
+					{shopDatas &&
+						shopDatas.map((shopData) => (
+							<YumItemWrapper shopData={shopData} category={category} />
+						))}
+				</YumList>
 				<Map
 					center={position}
-					style={{ width: "75vw", height: "95vh" }}
+					style={{ width: "65vw", height: "95vh" }}
 					level={4}
 					onClick={(_t, mouseEvent) => {
 						setPosition({
@@ -55,12 +76,18 @@ const YumYumMap = () => {
 				>
 					{shopDatas &&
 						shopDatas.map((shopData, index) => (
-							<MapMarkerWrapper key={index} shopData={shopData} />
+							<MapMarkerWrapper
+								key={index}
+								shopData={shopData}
+								category={category}
+							/>
 						))}
 				</Map>
 			</YumContainer>
 		</div>
 	);
 };
+
+const categories = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default YumYumMap;

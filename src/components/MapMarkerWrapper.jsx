@@ -5,29 +5,35 @@ import styled from "styled-components";
 
 let geocoder = new kakao.maps.services.Geocoder();
 
-const MapMarkerWrapper = ({ shopData }) => {
+const MapMarkerWrapper = ({ shopData, category }) => {
 	const [coord, setCoord] = useState(null);
 	const [isVisible, setIsVisible] = useState(false);
-	useEffect(
-		() =>
-			geocoder.addressSearch(shopData.address, function (result, status) {
-				if (status === kakao.maps.services.Status.OK) {
-					let coord = new kakao.maps.LatLng(result[0].y, result[0].x);
-					setCoord(coord);
-				}
-			}),
-		[]
-	);
+	const [showMarker, setShowMarker] = useState(true);
+	useEffect(() => {
+		geocoder.addressSearch(shopData.address, function (result, status) {
+			if (status === kakao.maps.services.Status.OK) {
+				let coord = new kakao.maps.LatLng(result[0].y, result[0].x);
+				setCoord(coord);
+			}
+		});
+	}, []);
+
+	useEffect(() => {
+		setShowMarker(() => {
+			if (category === 0) return true;
+			else if ("S00" + category === shopData.category) return true;
+			else return false;
+		});
+	}, [category]);
 	return (
 		<div>
-			{coord && (
+			{coord && showMarker && (
 				<MapMarker
 					position={{ lat: coord.Ma, lng: coord.La }}
 					onMouseOver={() => setIsVisible(true)}
 					onMouseOut={() => setIsVisible(false)}
 				>
-					<div>{shopData.name}</div>
-					<div>{isVisible && }</div>
+					{isVisible && <div>{shopData.name}</div>}
 				</MapMarker>
 			)}
 		</div>
