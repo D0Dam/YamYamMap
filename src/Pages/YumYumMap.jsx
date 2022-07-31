@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Map } from "react-kakao-maps-sdk";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import MapMarkerWrapper from "../components/MapMarkerWrapper";
 import NavButtonWrapper from "../components/NavButtonWrapper";
 import YumItemWrapper from "../components/YumItemWrapper";
@@ -31,6 +31,23 @@ const YumContainer = styled.div`
 
 const YumList = styled.div`
 	width: 35vw;
+	height: 95vh;
+	overflow-x: hidden;
+	overflow-y: auto;
+	::-webkit-scrollbar {
+		width: 6px;
+	}
+	:hover {
+		visibility: visible;
+		::-webkit-scrollbar-thumb {
+			border-radius: 6px;
+			background: #b2c8df;
+			:hover {
+				border-radius: 6px;
+				background: #6e85b7;
+			}
+		}
+	}
 `;
 
 const YumYumMap = () => {
