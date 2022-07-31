@@ -11,7 +11,21 @@ const YumItemWrapper = ({ shopData, category }) => {
 
 	const [filterCategory, setFilterCategory] = useState(true);
 
-	return <div>{shopData && filterCategory && <div>{shopData.name}</div>}</div>;
+	return (
+		<>
+			{shopData && filterCategory && (
+				<div>
+					<div>{shopData.name}</div>
+					<div>{shopData.phone}</div>
+					<div>
+						{shopData.open_time} ~ {shopData.close_time}
+					</div>
+					{shopData.delivery ? <div>배달가능</div> : <div>배달안됨</div>}
+					<br />
+				</div>
+			)}
+		</>
+	);
 };
 
 export default YumItemWrapper;
