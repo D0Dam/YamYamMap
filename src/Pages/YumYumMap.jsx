@@ -1,7 +1,7 @@
 /*global kakao*/
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Map } from "react-kakao-maps-sdk";
+import { CustomOverlayMap, Map } from "react-kakao-maps-sdk";
 import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import MapMarkerWrapper from "../components/MapMarkerWrapper";
@@ -30,22 +30,29 @@ const YumContainer = styled.div`
 `;
 
 const YumList = styled.div`
-	width: 35vw;
+	position: absolute;
+	z-index: 9999;
+	width: 312px;
 	height: 95vh;
 	overflow-x: hidden;
 	overflow-y: auto;
+	padding: 0;
 	::-webkit-scrollbar {
 		width: 6px;
+		opacity: 0;
+	}
+	::-webkit-scrollbar-thumb {
+		visibility: hidden;
+		background-color: gray;
+		border-radius: 6px;
+		opacity: 0.2;
 	}
 	:hover {
-		visibility: visible;
 		::-webkit-scrollbar-thumb {
-			border-radius: 6px;
-			background: #b2c8df;
-			:hover {
-				border-radius: 6px;
-				background: #6e85b7;
-			}
+			visibility: visible;
+		}
+		::-webkit-scrollbar-thumb:hover {
+			background-color: black;
 		}
 	}
 `;
@@ -57,10 +64,10 @@ const YumYumMap = () => {
 	});
 	const [shopDatas, setShopDatas] = useState(null);
 	const [category, setCategory] = useState(0);
+	const [checkMarker, setCheckMarker] = useState(null);
 	useEffect(() => {
 		axios.get(`https://api.koreatech.in/shops`).then((res) => {
 			setShopDatas(res.data.shops);
-			console.log(res.data.shops);
 		});
 	}, []);
 	return (
@@ -76,13 +83,19 @@ const YumYumMap = () => {
 			<YumContainer>
 				<YumList>
 					{shopDatas &&
-						shopDatas.map((shopData) => (
-							<YumItemWrapper shopData={shopData} category={category} />
+						shopDatas.map((shopData, index) => (
+							<YumItemWrapper
+								key={index}
+								shopData={shopData}
+								category={category}
+								categories={categories}
+								handleMarker={setCheckMarker}
+							/>
 						))}
 				</YumList>
 				<Map
 					center={position}
-					style={{ width: "65vw", height: "95vh" }}
+					style={{ width: "100vw", height: "95vh" }}
 					level={4}
 					onClick={(_t, mouseEvent) => {
 						setPosition({
@@ -97,6 +110,7 @@ const YumYumMap = () => {
 								key={index}
 								shopData={shopData}
 								category={category}
+								checkMarker={checkMarker}
 							/>
 						))}
 				</Map>
