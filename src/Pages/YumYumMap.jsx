@@ -32,7 +32,7 @@ const YumContainer = styled.div`
 const YumList = styled.div`
 	position: absolute;
 	z-index: 9999;
-	width: 312px;
+	width: 324px;
 	height: 95vh;
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -68,6 +68,7 @@ const YumYumMap = () => {
 	useEffect(() => {
 		axios.get(`https://api.koreatech.in/shops`).then((res) => {
 			setShopDatas(res.data.shops);
+			console.log(res.data.shops);
 		});
 	}, []);
 	return (
@@ -111,6 +112,7 @@ const YumYumMap = () => {
 								shopData={shopData}
 								category={category}
 								checkMarker={checkMarker}
+								zIndex={index}
 							/>
 						))}
 				</Map>

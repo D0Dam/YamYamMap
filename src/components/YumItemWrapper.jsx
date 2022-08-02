@@ -3,27 +3,64 @@ import styled from "styled-components";
 const YumItemContainer = styled.div`
 	display: flex;
 	align-items: center;
-	width: 296px;
+	width: 312px;
 	height: 80px;
 	background-color: white;
 	opacity: 0.8;
 	margin: 12px 0px 12px 8px;
 	border: none;
-	border-radius: 12px;
+	border-radius: 10px;
+	:hover {
+		opacity: 0.99;
+	}
 `;
-const YumImg = styled.div`
+
+const YumImg = styled.img`
 	width: 68px;
 	height: 68px;
-	opacity: 0.5;
+	opacity: 0.9;
 	background-color: gray;
 	border-radius: 12px;
 	margin-left: 6px;
 `;
+
 const YumDescription = styled.div`
-	margin: 6px;
+	display: flex;
+	flex-direction: column;
+	margin: 6px 0px 6px 6px;
+`;
+
+const ShopName = styled.div`
+	font-size: 16px;
+	font-weight: bold;
+`;
+const ShopPhone = styled.div`
+	font-size: 12px;
+`;
+const ShopTime = styled.div`
+	font-size: 12px;
+`;
+const ShopDetail = styled.div`
+	display: flex;
+	flex-direction: row;
+	margin: 2px 0px 2px 0px;
+`;
+const ShopDelivery = styled.div`
+	font-size: 10px;
+	padding: 1px 2px 1px 2px;
+	margin-right: 4px;
+	background: grey;
+	border-radius: 4px;
+`;
+const ShopCategory = styled.div`
+	font-size: 10px;
+	padding: 1px 2px 1px 2px;
+	border-radius: 4px;
+	background: grey;
 `;
 
 const YumItemWrapper = ({ shopData, category, categories, handleMarker }) => {
+	const [filterCategory, setFilterCategory] = useState(true);
 	useEffect(() => {
 		setFilterCategory(() => {
 			if (category === 0) return true;
@@ -31,7 +68,14 @@ const YumItemWrapper = ({ shopData, category, categories, handleMarker }) => {
 			else return false;
 		});
 	}, [category]);
-	const [filterCategory, setFilterCategory] = useState(true);
+
+	const getMainImage = () => {
+		if (shopData.image_urls) {
+			return shopData.image_urls[0];
+		} else {
+			return "/";
+		}
+	};
 
 	return (
 		<>
@@ -40,15 +84,23 @@ const YumItemWrapper = ({ shopData, category, categories, handleMarker }) => {
 					onMouseOver={() => handleMarker(shopData.address)}
 					onMouseOut={() => handleMarker(null)}
 				>
-					<YumImg></YumImg>
+					<YumImg src={getMainImage()}></YumImg>
 					<YumDescription>
-						<div>{shopData.name}</div>
-						<div>{shopData.phone}</div>
-						<span>
+						<ShopName>{shopData.name}</ShopName>
+						<ShopPhone>{shopData.phone}</ShopPhone>
+						<ShopTime>
 							{shopData.open_time} ~ {shopData.close_time}
-						</span>
-						{shopData.delivery ? <span>배달O</span> : <span>배달X</span>}
-						<div>분류 : {categories[shopData.category.substr(3, 3)]}</div>
+						</ShopTime>
+						<ShopDetail>
+							{shopData.delivery ? (
+								<ShopDelivery>배달가능</ShopDelivery>
+							) : (
+								<ShopDelivery>배달불가</ShopDelivery>
+							)}
+							<ShopCategory>
+								{categories[shopData.category.substr(3, 3)]}
+							</ShopCategory>
+						</ShopDetail>
 					</YumDescription>
 				</YumItemContainer>
 			)}
