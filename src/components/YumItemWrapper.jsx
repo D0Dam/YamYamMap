@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { AiFillPhone, AiFillClockCircle } from "react-icons/ai";
 const YumItemContainer = styled.div`
 	display: flex;
 	align-items: center;
-	width: 312px;
+	width: 304px;
 	height: 80px;
 	background-color: white;
 	opacity: 0.8;
 	margin: 12px 0px 12px 8px;
 	border: none;
 	border-radius: 10px;
+	box-shadow: 0px 0px 3px #cfd2cf;
+	transition: all 0.1s linear;
 	:hover {
+		transform: scale(1.02);
 		opacity: 0.99;
+		box-shadow: 0px 0px 6px #cfd2cf;
 	}
 `;
 
-const YumImg = styled.img`
+const YumTitleImg = styled.img`
 	width: 68px;
 	height: 68px;
-	opacity: 0.9;
+	opacity: 1;
 	background-color: gray;
 	border-radius: 12px;
 	margin-left: 6px;
@@ -35,9 +40,13 @@ const ShopName = styled.div`
 	font-weight: bold;
 `;
 const ShopPhone = styled.div`
+	display: flex;
+	flex-direction: row;
 	font-size: 12px;
 `;
 const ShopTime = styled.div`
+	display: flex;
+	flex-direction: row;
 	font-size: 12px;
 `;
 const ShopDetail = styled.div`
@@ -49,17 +58,25 @@ const ShopDelivery = styled.div`
 	font-size: 10px;
 	padding: 1px 2px 1px 2px;
 	margin-right: 4px;
-	background: grey;
+	background: #cfd2cf;
 	border-radius: 4px;
 `;
 const ShopCategory = styled.div`
 	font-size: 10px;
 	padding: 1px 2px 1px 2px;
+	background: #cfd2cf;
 	border-radius: 4px;
-	background: grey;
 `;
 
-const YumItemWrapper = ({ shopData, category, categories, handleMarker }) => {
+const YumItemWrapper = ({
+	shopData,
+	category,
+	categories,
+	handleMarker,
+	getImage,
+	showShopDetailHandler,
+	index,
+}) => {
 	const [filterCategory, setFilterCategory] = useState(true);
 	useEffect(() => {
 		setFilterCategory(() => {
@@ -69,27 +86,26 @@ const YumItemWrapper = ({ shopData, category, categories, handleMarker }) => {
 		});
 	}, [category]);
 
-	const getMainImage = () => {
-		if (shopData.image_urls) {
-			return shopData.image_urls[0];
-		} else {
-			return "/";
-		}
-	};
-
 	return (
 		<>
 			{shopData && filterCategory && (
 				<YumItemContainer
 					onMouseOver={() => handleMarker(shopData.address)}
 					onMouseOut={() => handleMarker(null)}
+					onClick={() => showShopDetailHandler(index)}
 				>
-					<YumImg src={getMainImage()}></YumImg>
+					<YumTitleImg src={getImage(shopData.image_urls, 0)}></YumTitleImg>
 					<YumDescription>
 						<ShopName>{shopData.name}</ShopName>
-						<ShopPhone>{shopData.phone}</ShopPhone>
+						<ShopPhone>
+							<AiFillPhone />
+							<div>&nbsp;&nbsp;{shopData.phone}</div>
+						</ShopPhone>
 						<ShopTime>
-							{shopData.open_time} ~ {shopData.close_time}
+							<AiFillClockCircle />
+							<div>
+								&nbsp;&nbsp;{shopData.open_time} ~ {shopData.close_time}
+							</div>
 						</ShopTime>
 						<ShopDetail>
 							{shopData.delivery ? (
