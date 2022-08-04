@@ -1,17 +1,16 @@
 /*global kakao*/
-import React, { useEffect, useState } from "react";
-import {
-	MapInfoWindow,
-	MapMarker,
-	CustomOverlayMap,
-} from "react-kakao-maps-sdk";
+import React, { useEffect, useRef, useState } from "react";
+import { CustomOverlayMap } from "react-kakao-maps-sdk";
 import styled from "styled-components";
 import { IoFastFoodOutline } from "react-icons/io5";
 
 let geocoder = new kakao.maps.services.Geocoder();
 
-const InfoWindow = styled.span`
+const MarkerCover = styled.div`
 	position: relative;
+`;
+
+const InfoWindow = styled.span`
 	background-color: white;
 	border: 1px solid black;
 	border-radius: 6px;
@@ -19,12 +18,15 @@ const InfoWindow = styled.span`
 	padding: 0;
 	margin: 0;
 	z-index: 10;
-	:hover {
-		z-index: 9999;
-	}
 `;
 
-const MapMarkerWrapper = ({ shopData, category, checkMarker }) => {
+const MapMarkerWrapper = ({
+	shopData,
+	category,
+	checkMarker,
+	showShopDetailHandler,
+	index,
+}) => {
 	const [coord, setCoord] = useState(null);
 	const [isVisible, setIsVisible] = useState(false);
 	const [showMarker, setShowMarker] = useState(true);
@@ -36,7 +38,6 @@ const MapMarkerWrapper = ({ shopData, category, checkMarker }) => {
 			}
 		});
 	}, []);
-
 	useEffect(() => {
 		setShowMarker(() => {
 			if (category === 0) return true;
@@ -44,7 +45,6 @@ const MapMarkerWrapper = ({ shopData, category, checkMarker }) => {
 			else return false;
 		});
 	}, [category]);
-
 	useEffect(() => {
 		setIsVisible(() => {
 			if (checkMarker === shopData.address) return true;
@@ -54,21 +54,21 @@ const MapMarkerWrapper = ({ shopData, category, checkMarker }) => {
 	return (
 		<div>
 			{coord && showMarker && (
-				<CustomOverlayMap
-					position={{ lat: coord.Ma, lng: coord.La }}
-					style={{ color: "#000", zIndex: "auto" }}
+				<MarkerCover
+					onMouseOver={() => setIsVisible(true)}
+					onMouseOut={() => setIsVisible(false)}
+					onClick={() => showShopDetailHandler(index)}
 				>
-					<InfoWindow
-						onMouseOver={() => setIsVisible(true)}
-						onMouseOut={() => setIsVisible(false)}
-					>
-						{isVisible ? <span>{shopData.name}</span> : <IoFastFoodOutline />}
-					</InfoWindow>
-				</CustomOverlayMap>
+					<CustomOverlayMap position={{ lat: coord.Ma, lng: coord.La }}>
+						<InfoWindow>
+							{isVisible ? <span>{shopData.name}</span> : <IoFastFoodOutline />}
+						</InfoWindow>
+					</CustomOverlayMap>
+				</MarkerCover>
 			)}
 		</div>
 	);
 };
 
 export default MapMarkerWrapper;
-const overlayIcons = "IoFastFoodOutIine";
+const overlayIcons = "<IoFastFoodOutIine/>";
