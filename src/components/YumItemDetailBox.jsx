@@ -43,7 +43,7 @@ const ItemInfo = styled.div`
 	margin: 0px 12px 0px 12px;
 `;
 const Name = styled.div`
-	font-weight: bold;
+	font-family: "Pretendard700";
 	font-size: 32px;
 	margin-bottom: 8px;
 `;

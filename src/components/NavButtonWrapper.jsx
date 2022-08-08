@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const NavButton = styled.button`
+	font-family: "Pretendard100";
 	color: black;
 	border: none;
 	background: none;

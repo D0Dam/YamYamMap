@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import YumYumMap from "./Pages/YumYumMap";
-
+import "./styles/fonts/Pretendard.css";
 const App = () => {
 	return (
 		<BrowserRouter>

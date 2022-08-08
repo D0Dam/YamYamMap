@@ -9,7 +9,6 @@ import NavButtonWrapper from "../components/NavButtonWrapper";
 import YumItemDetailBox from "../components/YumItemDetailBox";
 import YumItemWrapper from "../components/YumItemWrapper";
 import noImage from "../styles/assets/Image/noImage.png";
-
 const Navbar = styled.nav`
 	display: flex;
 	width: 100vw;
@@ -24,6 +23,7 @@ const Home = styled.button`
 	border: none;
 	border-radius: 6px;
 	box-shadow: 0px 0px 2px black;
+	font-family: "Pretendard300";
 	:hover {
 		transition: all 0.1s ease;
 		box-shadow: 0px 0px 4px black;
@@ -43,12 +43,13 @@ const NavButtons = styled.span`
 const YumContainer = styled.div`
 	display: flex;
 	flex-direction: row;
+	font-family: "Pretendard400";
 `;
 
 const YumList = styled.div`
 	position: absolute;
 	z-index: 2;
-	width: 25vw;
+	width: 312px;
 	min-width: 324px;
 	height: 95vh;
 	overflow-x: hidden;

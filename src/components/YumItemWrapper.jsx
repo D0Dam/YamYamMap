@@ -37,7 +37,7 @@ const YumDescription = styled.div`
 
 const ShopName = styled.div`
 	font-size: 16px;
-	font-weight: bold;
+	font-family: "Pretendard700";
 `;
 const ShopPhone = styled.div`
 	display: flex;
