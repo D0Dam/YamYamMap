@@ -78,6 +78,7 @@ const YumItemWrapper = ({
 	index,
 }) => {
 	const [filterCategory, setFilterCategory] = useState(true);
+	const [fixMarker, setFixMarker] = useState(false);
 	useEffect(() => {
 		setFilterCategory(() => {
 			if (category === 0) return true;
@@ -91,8 +92,11 @@ const YumItemWrapper = ({
 			{shopData && filterCategory && (
 				<YumItemContainer
 					onMouseOver={() => handleMarker(shopData.address)}
-					onMouseOut={() => handleMarker(null)}
-					onClick={() => showShopDetailHandler(index)}
+					onMouseOut={() => !fixMarker && handleMarker(null)}
+					onClick={() => {
+						showShopDetailHandler(index);
+						setFixMarker(true);
+					}}
 				>
 					<YumTitleImg src={getImage(shopData.image_urls, 0)}></YumTitleImg>
 					<YumDescription>

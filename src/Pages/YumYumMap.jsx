@@ -24,6 +24,13 @@ const Home = styled.button`
 	border: none;
 	border-radius: 6px;
 	box-shadow: 0px 0px 2px black;
+	:hover {
+		transition: all 0.1s ease;
+		box-shadow: 0px 0px 4px black;
+		:active {
+			box-shadow: 0px 0px 2px black;
+		}
+	}
 `;
 
 const NavButtons = styled.span`

@@ -1,22 +1,40 @@
 /*global kakao*/
 import React, { useEffect, useRef, useState } from "react";
 import { CustomOverlayMap } from "react-kakao-maps-sdk";
-import styled from "styled-components";
-import { IoFastFoodOutline } from "react-icons/io5";
+import styled, { css } from "styled-components";
+import { GiPositionMarker } from "react-icons/gi";
+import { isVisible } from "@testing-library/user-event/dist/utils";
 
 let geocoder = new kakao.maps.services.Geocoder();
 
 const MarkerCover = styled.div``;
-
+const Blank = styled.span`
+	width: 24px;
+`;
 const InfoWindow = styled.span`
-	background-color: white;
-	border: 1px solid black;
+	background-color: none;
+	border: none;
 	border-radius: 6px;
 	width: 100%;
 	padding: 0;
 	margin: 0;
+	${(props) =>
+		props.isVisible &&
+		css`
+			transition: all 0.1s ease;
+			padding: 2px 6px 2px 6px;
+			background-color: white;
+			border-radius: 10px;
+			box-shadow: 0px 0px 3px #ec994b;
+		`}
+	:active {
+		padding: 2px 6px 2px 6px;
+		background-color: white;
+		border-radius: 10px;
+		box-shadow: 0px 0px 6px #ffa500;
+	}
 `;
-
+const InfoWindowName = styled.span``;
 const MapMarkerWrapper = ({
 	shopData,
 	category,
@@ -71,9 +89,15 @@ const MapMarkerWrapper = ({
 						position={{ lat: coord.Ma, lng: coord.La }}
 						zIndex={overlayZIndex}
 					>
-						<InfoWindow>
-							{isVisible ? <span>{shopData.name}</span> : <IoFastFoodOutline />}
+						<Blank />
+						<InfoWindow isVisible={isVisible}>
+							{isVisible ? (
+								<InfoWindowName>{shopData.name}</InfoWindowName>
+							) : (
+								<GiPositionMarker color="orange" size={16} />
+							)}
 						</InfoWindow>
+						<Blank />
 					</CustomOverlayMap>
 				</MarkerCover>
 			)}
@@ -82,4 +106,14 @@ const MapMarkerWrapper = ({
 };
 
 export default MapMarkerWrapper;
-const overlayIcons = "<IoFastFoodOutIine/>";
+
+/*
+<
+<AiFillCar/> 차
+<GiMeat/> 고기
+<GiNoodles/> 중식
+<GiRoastChicken/> 치킨
+<FaPizzaSlice/> 피자
+<IoIosCut /> 미용실
+<MdFoodBank /> 그냥 한식으로
+*/

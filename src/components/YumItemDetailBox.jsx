@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const YumItemDetail = styled.div`
 	position: absolute;
@@ -20,6 +20,11 @@ const YumItemDetail = styled.div`
 		opacity: 0.99;
 		box-shadow: 0px 0px 6px #cfd2cf;
 	}
+	${(props) =>
+		props.shopData &&
+		css`
+			transition: all 0.1s ease;
+		`}
 `;
 
 const MainImg = styled.img`
