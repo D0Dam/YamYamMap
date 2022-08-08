@@ -8,7 +8,7 @@ import MapMarkerWrapper from "../components/MapMarkerWrapper";
 import NavButtonWrapper from "../components/NavButtonWrapper";
 import YumItemDetailBox from "../components/YumItemDetailBox";
 import YumItemWrapper from "../components/YumItemWrapper";
-import noImage from "../styles/Image/noImage.png";
+import noImage from "../styles/assets/Image/noImage.png";
 
 const Navbar = styled.nav`
 	display: flex;
