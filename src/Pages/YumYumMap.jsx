@@ -9,6 +9,7 @@ import NavButtonWrapper from "../components/NavButtonWrapper";
 import YumItemDetailBox from "../components/YumItemDetailBox";
 import YumItemWrapper from "../components/YumItemWrapper";
 import noImage from "../styles/Image/noImage.png";
+
 const Navbar = styled.nav`
 	display: flex;
 	width: 100vw;

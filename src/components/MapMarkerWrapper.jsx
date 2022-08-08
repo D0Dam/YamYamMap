@@ -6,9 +6,7 @@ import { IoFastFoodOutline } from "react-icons/io5";
 
 let geocoder = new kakao.maps.services.Geocoder();
 
-const MarkerCover = styled.div`
-	position: relative;
-`;
+const MarkerCover = styled.div``;
 
 const InfoWindow = styled.span`
 	background-color: white;
@@ -17,7 +15,6 @@ const InfoWindow = styled.span`
 	width: 100%;
 	padding: 0;
 	margin: 0;
-	z-index: 10;
 `;
 
 const MapMarkerWrapper = ({
@@ -30,6 +27,7 @@ const MapMarkerWrapper = ({
 	const [coord, setCoord] = useState(null);
 	const [isVisible, setIsVisible] = useState(false);
 	const [showMarker, setShowMarker] = useState(true);
+	const [overlayZIndex, setOverlayZIndex] = useState(0);
 	useEffect(() => {
 		geocoder.addressSearch(shopData.address, function (result, status) {
 			if (status === kakao.maps.services.Status.OK) {
@@ -50,23 +48,36 @@ const MapMarkerWrapper = ({
 			if (checkMarker === shopData.address) return true;
 		});
 	}, [checkMarker]);
-
+	useEffect(() => {
+		if (isVisible) {
+			setOverlayZIndex(99);
+		} else {
+			setOverlayZIndex(1);
+		}
+	}, [isVisible]);
 	return (
-		<div>
+		<>
 			{coord && showMarker && (
 				<MarkerCover
-					onMouseOver={() => setIsVisible(true)}
-					onMouseOut={() => setIsVisible(false)}
+					onMouseOver={() => {
+						setIsVisible(true);
+					}}
+					onMouseOut={() => {
+						setIsVisible(false);
+					}}
 					onClick={() => showShopDetailHandler(index)}
 				>
-					<CustomOverlayMap position={{ lat: coord.Ma, lng: coord.La }}>
+					<CustomOverlayMap
+						position={{ lat: coord.Ma, lng: coord.La }}
+						zIndex={overlayZIndex}
+					>
 						<InfoWindow>
 							{isVisible ? <span>{shopData.name}</span> : <IoFastFoodOutline />}
 						</InfoWindow>
 					</CustomOverlayMap>
 				</MarkerCover>
 			)}
-		</div>
+		</>
 	);
 };
 
