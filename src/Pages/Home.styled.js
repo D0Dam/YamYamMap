@@ -8,6 +8,9 @@ export const smoothAppear = keyframes`
 30% {
   opacity: 0;
 }
+60% {
+	opacity: 1;
+}
 100% {
   opacity: 1;
   transform: translateY(0);
@@ -55,7 +58,9 @@ export const StartButton = styled.button`
 	border: none;
 	background: white;
 	box-shadow: 0px 0px 2px #e0d8b0;
+	transition: all 0.2s ease;
 	:hover {
+		transform: scale(1.075);
 		box-shadow: 0px 0px 6px #e0d8b0;
 		font-family: "Pretendard600";
 	}
@@ -66,13 +71,13 @@ export const Title = styled.div`
 	flex-direction: column;
 	.maintitle {
 		font-size: 60px;
-		animation: ${smoothAppear} 1.495s;
+		animation: ${smoothAppear} 1.4s;
 	}
 	.subtitle {
 		font-size: 36px;
 		margin: 36px 0px 0px 8px;
 		font-family: "Pretendard500";
-		animation: ${smoothAppear} 1.495s alternate;
+		animation: ${smoothAppear} 2.49s alternate;
 		animation-iteration-count: infinite;
 	}
 `;
@@ -82,7 +87,7 @@ export const MainPicture = styled.img`
 	background: none;
 	height: 512px;
 	width: 512px;
-	animation: ${smoothAppear} 1.495s alternate;
+	animation: ${smoothAppear} 2.49s alternate;
 	animation-iteration-count: infinite;
 `;
 export const Picture = styled.img`

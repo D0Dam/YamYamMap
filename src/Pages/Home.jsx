@@ -88,7 +88,7 @@ const Home = () => {
 			} else {
 				setTitleIndex(0);
 			}
-		}, "3000");
+		}, "5000");
 	};
 	const changeTitle = (titleIndex) => {
 		if (titleIndex === 0) {
