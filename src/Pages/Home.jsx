@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
-import "./Home.css";
+import * as S from "./Home.styled";
 import pizza from "../styles/assets/Image/pizza.png";
 import location from "../styles/assets/Image/location.png";
 import delivery from "../styles/assets/Image/delivery.png";
@@ -11,99 +10,9 @@ import bread from "../styles/assets/Image/bread.png";
 import chiken from "../styles/assets/Image/chiken.png";
 import snack from "../styles/assets/Image/snack.png";
 
-const smoothAppear = keyframes`
-	0% {
-		opacity: 0;
-		transform: translateY(-10%);
-	}
-	30% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-		transform: translateY(0);
-	}
-`;
-const Outer = styled.div`
-	font-family: "Pretendard700";
-	overflow-y: auto;
-	height: 100vh;
-	::-webkit-scrollbar {
-		display: none;
-	}
-	.inner {
-		height: 100vh;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		font-size: 100px;
-	}
-`;
-
-const FirstPage = styled.div`
-	background: #f9f2ed;
-`;
-const StartButton = styled.button`
-	position: absolute;
-	width: 100px;
-	height: 36px;
-	right: 24px;
-	top: 24px;
-	border-radius: 50px;
-	border: none;
-	background: white;
-	box-shadow: 0px 0px 2px #e0d8b0;
-	:hover {
-		box-shadow: 0px 0px 6px #e0d8b0;
-		font-family: "Pretendard600";
-	}
-`;
-const Title = styled.div`
-	display: flex;
-	width: 342px;
-	flex-direction: column;
-	.maintitle {
-		font-size: 60px;
-		animation: ${smoothAppear} 1.5s;
-	}
-	.subtitle {
-		font-size: 36px;
-		margin: 36px 0px 0px 8px;
-		font-family: "Pretendard500";
-		animation: ${smoothAppear} 1.499s alternate;
-		animation-iteration-count: infinite;
-	}
-`;
-const MainPicture = styled.img`
-	font-family: "Pretendard500";
-	font-size: 24px;
-	background: none;
-	height: 512px;
-	width: 512px;
-	animation: ${smoothAppear} 1.499s alternate;
-	animation-iteration-count: infinite;
-`;
-const Picture = styled.img`
-	font-family: "Pretendard500";
-	font-size: 24px;
-	background: none;
-	height: 512px;
-	width: 512px;
-`;
-const Description = styled.div`
-	font-size: 16px;
-	margin: 36px 0px 0px 8px;
-	font-family: "Pretendard500";
-`;
-const SecondPage = styled.div`
-	background: #f9f2ed;
-`;
-const ThirdPage = styled.div`
-	background: #f9f2ed;
-`;
-
 const Home = () => {
 	const [titleIndex, setTitleIndex] = useState(0);
+	const [isEnter, setIsEnter] = useState(false);
 	const outerDivRef = useRef();
 	useEffect(() => {
 		const wheelHandler = (e) => {
@@ -198,9 +107,9 @@ const Home = () => {
 	};
 
 	return (
-		<Outer ref={outerDivRef} className="outer">
-			<FirstPage className="inner">
-				<StartButton>
+		<S.Outer ref={outerDivRef} className="outer">
+			<S.FirstPage className="inner">
+				<S.StartButton>
 					<Link
 						to="YumYumMap"
 						style={{
@@ -210,44 +119,50 @@ const Home = () => {
 					>
 						Get Start!
 					</Link>
-				</StartButton>
-				<Title>
+				</S.StartButton>
+				<S.YumYum
+					onMouseEnter={() => setIsEnter(true)}
+					onMouseOut={() => setIsEnter(false)}
+				>
+					YumYum{isEnter && "!"}
+				</S.YumYum>
+				<S.Title>
 					<div className="maintitle">
 						병천에서 <br /> 든든한 한끼가 <br /> 필요할 때...
 					</div>
 					{changeTitle(titleIndex)}
-				</Title>
-				<MainPicture src={food[titleIndex]}></MainPicture>
-			</FirstPage>
-			<SecondPage className="inner">
-				<Title>
+				</S.Title>
+				<S.MainPicture src={food[titleIndex]}></S.MainPicture>
+			</S.FirstPage>
+			<S.SecondPage className="inner">
+				<S.Title>
 					<div className="maintitle">
 						병천의
 						<br /> 최고맛집을 <br /> 한눈에!
 					</div>
-					<Description>
+					<S.Description>
 						병천이 병천순대만 유명한게 아닙니다. <br />
 						맛있는게 얼마나 많은데요!!
 						<br />
-					</Description>
-				</Title>
-				<Picture src={location}></Picture>
-			</SecondPage>
-			<ThirdPage className="inner">
-				<Title>
+					</S.Description>
+				</S.Title>
+				<S.Picture src={location}></S.Picture>
+			</S.SecondPage>
+			<S.ThirdPage className="inner">
+				<S.Title>
 					<div className="maintitle">
 						배달이 되나
 						<br /> 확인까지 <br /> 다되는!
 					</div>
-					<Description>
+					<S.Description>
 						여기가 배달이 되는 곳이었나 헷갈리신다구요? <br />
 						걱정 말아요~ 그 정보 다 여기 있으니~
 						<br />
-					</Description>
-				</Title>
-				<Picture src={delivery}></Picture>
-			</ThirdPage>
-		</Outer>
+					</S.Description>
+				</S.Title>
+				<S.Picture src={delivery}></S.Picture>
+			</S.ThirdPage>
+		</S.Outer>
 	);
 };
 const food = [pizza, burger, meat, bread, chiken, snack];
