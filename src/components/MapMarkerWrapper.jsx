@@ -11,6 +11,8 @@ const MapMarkerWrapper = ({
 	checkMarker,
 	showShopDetailHandler,
 	index,
+	setPositionCenter,
+	fixCenter,
 }) => {
 	const [coord, setCoord] = useState(null);
 	const [isVisible, setIsVisible] = useState(false);
@@ -43,6 +45,15 @@ const MapMarkerWrapper = ({
 			setOverlayZIndex(1);
 		}
 	}, [isVisible]);
+	useEffect(() => {
+		if (index === fixCenter) {
+			if (coord) {
+				setPositionCenter({ lat: coord.Ma, lng: coord.La });
+			} else {
+				console.log("없음");
+			}
+		}
+	}, [fixCenter]);
 	return (
 		<>
 			{coord && showMarker && (
@@ -53,7 +64,9 @@ const MapMarkerWrapper = ({
 					onMouseOut={() => {
 						setIsVisible(false);
 					}}
-					onClick={() => showShopDetailHandler(index)}
+					onClick={() => {
+						showShopDetailHandler(index);
+					}}
 				>
 					<CustomOverlayMap
 						position={{ lat: coord.Ma, lng: coord.La }}

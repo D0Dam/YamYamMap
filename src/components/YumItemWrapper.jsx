@@ -1,6 +1,8 @@
+/*global kakao*/
 import React, { useEffect, useState } from "react";
 import * as S from "./YumItemWrapper.styled";
 import { AiFillPhone, AiFillClockCircle } from "react-icons/ai";
+let geocoder = new kakao.maps.services.Geocoder();
 
 const YumItemWrapper = ({
 	shopData,
@@ -10,9 +12,10 @@ const YumItemWrapper = ({
 	getImage,
 	showShopDetailHandler,
 	index,
+	handleCenter,
 }) => {
 	const [filterCategory, setFilterCategory] = useState(true);
-	const [fixMarker, setFixMarker] = useState(false);
+	const [fixMarker, setFixMarker] = useState(null);
 	useEffect(() => {
 		setFilterCategory(() => {
 			if (category === 0) return true;
@@ -20,7 +23,6 @@ const YumItemWrapper = ({
 			else return false;
 		});
 	}, [category]);
-
 	return (
 		<>
 			{shopData && filterCategory && (
@@ -30,6 +32,7 @@ const YumItemWrapper = ({
 					onClick={() => {
 						showShopDetailHandler(index);
 						setFixMarker(true);
+						handleCenter(index);
 					}}
 				>
 					<S.YumTitleImg src={getImage(shopData.image_urls, 0)}></S.YumTitleImg>

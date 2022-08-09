@@ -1,7 +1,7 @@
 /*global kakao*/
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { CustomOverlayMap, Map } from "react-kakao-maps-sdk";
+import { Map } from "react-kakao-maps-sdk";
 import { Link } from "react-router-dom";
 import MapMarkerWrapper from "../components/MapMarkerWrapper";
 import NavButtonWrapper from "../components/NavButtonWrapper";
@@ -15,6 +15,7 @@ const YumYumMap = () => {
 		lat: 36.763924,
 		lng: 127.2823112,
 	});
+	const [seletedCenter, setSelectedCenter] = useState(null);
 	const [shopDatas, setShopDatas] = useState(null);
 	const [category, setCategory] = useState(0);
 	const [checkMarker, setCheckMarker] = useState(null);
@@ -62,6 +63,7 @@ const YumYumMap = () => {
 								getImage={getImage}
 								showShopDetailHandler={showShopDetailHandler}
 								index={index}
+								handleCenter={setSelectedCenter}
 							/>
 						))}
 				</S.YumList>
@@ -76,6 +78,7 @@ const YumYumMap = () => {
 					style={{ width: "100vw", height: "95vh" }}
 					level={4}
 					onClick={() => showShopDetailHandler(null)}
+					isPanto={true}
 				>
 					{shopDatas &&
 						shopDatas.map((shopData, index) => (
@@ -86,6 +89,8 @@ const YumYumMap = () => {
 								checkMarker={checkMarker}
 								showShopDetailHandler={showShopDetailHandler}
 								index={index}
+								setPositionCenter={setPosition}
+								fixCenter={seletedCenter}
 							/>
 						))}
 				</Map>
