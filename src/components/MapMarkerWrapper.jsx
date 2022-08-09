@@ -1,40 +1,10 @@
 /*global kakao*/
 import React, { useEffect, useRef, useState } from "react";
 import { CustomOverlayMap } from "react-kakao-maps-sdk";
-import styled, { css } from "styled-components";
 import { GiPositionMarker } from "react-icons/gi";
-import { isVisible } from "@testing-library/user-event/dist/utils";
-
+import * as S from "./MapMarkerWrapper.styled";
 let geocoder = new kakao.maps.services.Geocoder();
 
-const MarkerCover = styled.div``;
-const Blank = styled.span`
-	width: 24px;
-`;
-const InfoWindow = styled.span`
-	background-color: none;
-	border: none;
-	border-radius: 6px;
-	width: 100%;
-	padding: 0;
-	margin: 0;
-	${(props) =>
-		props.isVisible &&
-		css`
-			transition: all 0.1s ease;
-			padding: 2px 6px 2px 6px;
-			background-color: white;
-			border-radius: 10px;
-			box-shadow: 0px 0px 3px #ec994b;
-		`}
-	:active {
-		padding: 2px 6px 2px 6px;
-		background-color: white;
-		border-radius: 10px;
-		box-shadow: 0px 0px 6px #ffa500;
-	}
-`;
-const InfoWindowName = styled.span``;
 const MapMarkerWrapper = ({
 	shopData,
 	category,
@@ -76,7 +46,7 @@ const MapMarkerWrapper = ({
 	return (
 		<>
 			{coord && showMarker && (
-				<MarkerCover
+				<S.MarkerCover
 					onMouseOver={() => {
 						setIsVisible(true);
 					}}
@@ -89,17 +59,17 @@ const MapMarkerWrapper = ({
 						position={{ lat: coord.Ma, lng: coord.La }}
 						zIndex={overlayZIndex}
 					>
-						<Blank />
-						<InfoWindow isVisible={isVisible}>
+						<S.Blank />
+						<S.InfoWindow isVisible={isVisible}>
 							{isVisible ? (
-								<InfoWindowName>{shopData.name}</InfoWindowName>
+								<S.InfoWindowName>{shopData.name}</S.InfoWindowName>
 							) : (
 								<GiPositionMarker color="orange" size={16} />
 							)}
-						</InfoWindow>
-						<Blank />
+						</S.InfoWindow>
+						<S.Blank />
 					</CustomOverlayMap>
-				</MarkerCover>
+				</S.MarkerCover>
 			)}
 		</>
 	);

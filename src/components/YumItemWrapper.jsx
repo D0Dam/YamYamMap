@@ -1,72 +1,6 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import * as S from "./YumItemWrapper.styled";
 import { AiFillPhone, AiFillClockCircle } from "react-icons/ai";
-const YumItemContainer = styled.div`
-	display: flex;
-	align-items: center;
-	width: 304px;
-	height: 80px;
-	background-color: white;
-	opacity: 0.8;
-	margin: 12px 0px 12px 8px;
-	border: none;
-	border-radius: 10px;
-	box-shadow: 0px 0px 3px #cfd2cf;
-	transition: all 0.1s linear;
-	:hover {
-		transform: scale(1.02);
-		opacity: 0.99;
-		box-shadow: 0px 0px 6px #cfd2cf;
-	}
-`;
-
-const YumTitleImg = styled.img`
-	width: 68px;
-	height: 68px;
-	opacity: 1;
-	background-color: gray;
-	border-radius: 12px;
-	margin-left: 6px;
-`;
-
-const YumDescription = styled.div`
-	display: flex;
-	flex-direction: column;
-	margin: 6px 0px 6px 6px;
-`;
-
-const ShopName = styled.div`
-	font-size: 16px;
-	font-family: "Pretendard700";
-`;
-const ShopPhone = styled.div`
-	display: flex;
-	flex-direction: row;
-	font-size: 12px;
-`;
-const ShopTime = styled.div`
-	display: flex;
-	flex-direction: row;
-	font-size: 12px;
-`;
-const ShopDetail = styled.div`
-	display: flex;
-	flex-direction: row;
-	margin: 2px 0px 2px 0px;
-`;
-const ShopDelivery = styled.div`
-	font-size: 10px;
-	padding: 1px 2px 1px 2px;
-	margin-right: 4px;
-	background: #cfd2cf;
-	border-radius: 4px;
-`;
-const ShopCategory = styled.div`
-	font-size: 10px;
-	padding: 1px 2px 1px 2px;
-	background: #cfd2cf;
-	border-radius: 4px;
-`;
 
 const YumItemWrapper = ({
 	shopData,
@@ -90,7 +24,7 @@ const YumItemWrapper = ({
 	return (
 		<>
 			{shopData && filterCategory && (
-				<YumItemContainer
+				<S.YumItemContainer
 					onMouseOver={() => handleMarker(shopData.address)}
 					onMouseOut={() => !fixMarker && handleMarker(null)}
 					onClick={() => {
@@ -98,31 +32,31 @@ const YumItemWrapper = ({
 						setFixMarker(true);
 					}}
 				>
-					<YumTitleImg src={getImage(shopData.image_urls, 0)}></YumTitleImg>
-					<YumDescription>
-						<ShopName>{shopData.name}</ShopName>
-						<ShopPhone>
+					<S.YumTitleImg src={getImage(shopData.image_urls, 0)}></S.YumTitleImg>
+					<S.YumDescription>
+						<S.ShopName>{shopData.name}</S.ShopName>
+						<S.ShopPhone>
 							<AiFillPhone />
 							<div>&nbsp;&nbsp;{shopData.phone}</div>
-						</ShopPhone>
-						<ShopTime>
+						</S.ShopPhone>
+						<S.ShopTime>
 							<AiFillClockCircle />
 							<div>
 								&nbsp;&nbsp;{shopData.open_time} ~ {shopData.close_time}
 							</div>
-						</ShopTime>
-						<ShopDetail>
+						</S.ShopTime>
+						<S.ShopDetail>
 							{shopData.delivery ? (
-								<ShopDelivery>배달가능</ShopDelivery>
+								<S.ShopDelivery>배달가능</S.ShopDelivery>
 							) : (
-								<ShopDelivery>배달불가</ShopDelivery>
+								<S.ShopDelivery>배달불가</S.ShopDelivery>
 							)}
-							<ShopCategory>
+							<S.ShopCategory>
 								{categories[shopData.category.substr(3, 3)]}
-							</ShopCategory>
-						</ShopDetail>
-					</YumDescription>
-				</YumItemContainer>
+							</S.ShopCategory>
+						</S.ShopDetail>
+					</S.YumDescription>
+				</S.YumItemContainer>
 			)}
 		</>
 	);
