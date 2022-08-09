@@ -1,8 +1,6 @@
-/*global kakao*/
 import React, { useEffect, useState } from "react";
 import * as S from "./YumItemWrapper.styled";
 import { AiFillPhone, AiFillClockCircle } from "react-icons/ai";
-let geocoder = new kakao.maps.services.Geocoder();
 
 const YumItemWrapper = ({
 	shopData,

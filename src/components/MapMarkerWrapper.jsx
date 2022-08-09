@@ -1,5 +1,5 @@
 /*global kakao*/
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CustomOverlayMap } from "react-kakao-maps-sdk";
 import { GiPositionMarker } from "react-icons/gi";
 import * as S from "./MapMarkerWrapper.styled";

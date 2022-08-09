@@ -1,4 +1,3 @@
-/*global kakao*/
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Map } from "react-kakao-maps-sdk";
