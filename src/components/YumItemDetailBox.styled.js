@@ -7,9 +7,11 @@ export const YumItemDetail = styled.div`
 	z-index: 3;
 	margin: 0px;
 	left: 324px;
-	top: 55%;
+	bottom: 12px;
 	right: 0px;
 	height: 43.8vh;
+	min-width: 750px;
+	min-height: 360px;
 	opacity: 0.9;
 	margin: 0px 10px 0px 0px;
 	border-radius: 12px;
@@ -27,8 +29,8 @@ export const YumItemDetail = styled.div`
 `;
 
 export const MainImg = styled.img`
-	width: 320px;
-	height: 320px;
+	width: 40%;
+	height: 90%;
 	margin-left: 12px;
 `;
 export const Top = styled.div``;
@@ -37,7 +39,7 @@ export const ItemInfo = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	height: 320px;
+	height: 90%;
 	width: 100%;
 	margin: 0px 12px 0px 12px;
 `;

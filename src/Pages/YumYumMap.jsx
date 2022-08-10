@@ -12,7 +12,7 @@ import * as S from "./YumYumMap.styled";
 const YumYumMap = () => {
 	const [position, setPosition] = useState({
 		lat: 36.763924,
-		lng: 127.2823112,
+		lng: 127.2813112,
 	});
 	const [seletedCenter, setSelectedCenter] = useState(null);
 	const [shopDatas, setShopDatas] = useState(null);
@@ -50,6 +50,11 @@ const YumYumMap = () => {
 				</S.NavButtons>
 			</S.Navbar>
 			<S.YumContainer>
+				<S.GoToCenterButton
+					onClick={() => setPosition({ lat: 36.763924, lng: 127.2813112 })}
+				>
+					Center
+				</S.GoToCenterButton>
 				<S.YumList>
 					{shopDatas &&
 						shopDatas.map((shopData, index) => (
@@ -74,7 +79,11 @@ const YumYumMap = () => {
 				)}
 				<Map
 					center={position}
-					style={{ width: "100vw", height: "95vh" }}
+					style={{
+						width: "100vw",
+						height: "95vh",
+						minWidth: "1124px",
+					}}
 					level={4}
 					onClick={() => showShopDetailHandler(null)}
 					isPanto={true}

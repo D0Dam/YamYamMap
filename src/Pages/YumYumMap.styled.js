@@ -1,14 +1,17 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 export const Navbar = styled.nav`
 	display: flex;
 	width: 100vw;
 	height: 5vh;
+	min-width: 1000px;
+	min-height: 36px;
 	align-items: center;
 `;
 
 export const Home = styled.button`
 	width: 84px;
+	min-width: 84px;
 	height: 28px;
 	margin: 6px;
 	border: none;
@@ -28,6 +31,8 @@ export const NavButtons = styled.span`
 	display: flex;
 	width: 100vw;
 	height: 5vh;
+	min-width: 1000px;
+	min-height: 36px;
 	justify-content: space-between;
 `;
 
@@ -35,6 +40,24 @@ export const YumContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	font-family: "Pretendard400";
+`;
+
+export const GoToCenterButton = styled.button`
+	position: absolute;
+	z-index: 999;
+	top: 6vh;
+	right: 1vh;
+	width: 60px;
+	height: 36px;
+	border: none;
+	border-radius: 16px;
+	background: white;
+	margin: 0;
+	padding: 0;
+	:hover {
+		transition: all 0.2s ease;
+		background: #f2f2f2;
+	}
 `;
 
 export const YumList = styled.div`

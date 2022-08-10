@@ -18,6 +18,8 @@ export const smoothAppear = keyframes`
 `;
 export const Outer = styled.div`
 	font-family: "Pretendard700";
+	min-width: 810px;
+	min-height: 560px;
 	overflow-y: auto;
 	height: 100vh;
 	::-webkit-scrollbar {
