@@ -5,15 +5,23 @@ export const smoothAppear = keyframes`
   opacity: 0;
   transform: translateY(-10%);
 }
-30% {
-  opacity: 0;
-}
-60% {
-	opacity: 1;
+20% {
+	opacity: 0;
 }
 100% {
   opacity: 1;
   transform: translateY(0);
+}
+`;
+
+export const smoothDisappear = keyframes`
+0% {
+  opacity: 1;
+  transform: translateY(0);
+}
+100% {
+  opacity: 0;
+  transform: translateY(-5%);
 }
 `;
 export const Outer = styled.div`
@@ -36,6 +44,20 @@ export const Outer = styled.div`
 
 export const FirstPage = styled.div`
 	background: #f9f2ed;
+	.foods-enter {
+		opacity: 0;
+	}
+	.foods-enter-active {
+		opacity: 1;
+		animation: ${smoothAppear} 1.4s;
+	}
+	.foods-exit {
+		opacity: 1;
+	}
+	.foods-exit-active {
+		opacity: 0;
+		animation: ${smoothDisappear} 1.499s;
+	}
 `;
 export const YumYum = styled.div`
 	position: absolute;
@@ -46,6 +68,7 @@ export const YumYum = styled.div`
 	top: 24px;
 	font-size: 24px;
 	transition: all 0.2s ease;
+	animation: ${smoothAppear} 1s;
 	:hover {
 		transform: scale(1.15);
 	}
@@ -66,6 +89,7 @@ export const StartButton = styled.button`
 		box-shadow: 0px 0px 6px #e0d8b0;
 		font-family: "Pretendard600";
 	}
+	animation: ${smoothAppear} 1s;
 `;
 export const Title = styled.div`
 	display: flex;
@@ -74,13 +98,30 @@ export const Title = styled.div`
 	.maintitle {
 		font-size: 60px;
 		animation: ${smoothAppear} 1.4s;
+		:hover {
+			transition: all 0.2s ease;
+			transform: scale(1.05);
+		}
 	}
 	.subtitle {
 		font-size: 36px;
 		margin: 36px 0px 0px 8px;
 		font-family: "Pretendard500";
-		animation: ${smoothAppear} 2.49s alternate;
-		animation-iteration-count: infinite;
+		animation: ${smoothAppear} 1.4s;
+	}
+	.subtitle-enter {
+		opacity: 0;
+	}
+	.subtitle-enter-active {
+		opacity: 1;
+		animation: ${smoothAppear} 1.4s;
+	}
+	.subtitle-exit {
+		opacity: 1;
+	}
+	.subtitle-exit-active {
+		opacity: 0;
+		animation: ${smoothDisappear} 1.4s;
 	}
 `;
 export const MainPicture = styled.img`
@@ -89,8 +130,6 @@ export const MainPicture = styled.img`
 	background: none;
 	height: 512px;
 	width: 512px;
-	animation: ${smoothAppear} 2.49s alternate;
-	animation-iteration-count: infinite;
 `;
 export const Picture = styled.img`
 	font-family: "Pretendard500";

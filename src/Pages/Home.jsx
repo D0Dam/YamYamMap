@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import * as S from "./Home.styled";
+import { CSSTransition } from "react-transition-group";
 import pizza from "../styles/assets/Image/pizza.png";
 import location from "../styles/assets/Image/location.png";
 import delivery from "../styles/assets/Image/delivery.png";
@@ -12,7 +13,9 @@ import snack from "../styles/assets/Image/snack.png";
 
 const Home = () => {
 	const [titleIndex, setTitleIndex] = useState(0);
-	const [isEnter, setIsEnter] = useState(false);
+	const [isEnterYum, setIsEnterYum] = useState(false);
+	const [isEnterTitle, setIsEnterTitle] = useState(false);
+	const [animationSwitch, setAnimationSwitch] = useState(true);
 	const outerDivRef = useRef();
 	useEffect(() => {
 		const wheelHandler = (e) => {
@@ -80,6 +83,11 @@ const Home = () => {
 	useEffect(() => {
 		titlecycling(titleIndex);
 	}, [titleIndex]);
+	useEffect(() => {
+		if (animationSwitch) {
+			setTimeout(() => setAnimationSwitch(false), 3499);
+		}
+	}, [animationSwitch]);
 	const titlecycling = (titleIndex) => {
 		setTimeout(() => {
 			if (titleIndex < 5) {
@@ -88,24 +96,9 @@ const Home = () => {
 			} else {
 				setTitleIndex(0);
 			}
+			setAnimationSwitch(true);
 		}, "5000");
 	};
-	const changeTitle = (titleIndex) => {
-		if (titleIndex === 0) {
-			return <div className="subtitle">피자가 끌린다!</div>;
-		} else if (titleIndex === 1) {
-			return <div className="subtitle">햄버거가 끌린다!</div>;
-		} else if (titleIndex === 2) {
-			return <div className="subtitle">고기가 끌린다!</div>;
-		} else if (titleIndex === 3) {
-			return <div className="subtitle">빵이 끌린다!</div>;
-		} else if (titleIndex === 4) {
-			return <div className="subtitle">치킨이 끌린다!</div>;
-		} else {
-			return <div className="subtitle">간식이 끌린다!</div>;
-		}
-	};
-
 	return (
 		<S.Outer ref={outerDivRef} className="outer">
 			<S.FirstPage className="inner">
@@ -121,18 +114,31 @@ const Home = () => {
 					</Link>
 				</S.StartButton>
 				<S.YumYum
-					onMouseEnter={() => setIsEnter(true)}
-					onMouseOut={() => setIsEnter(false)}
+					onMouseEnter={() => setIsEnterYum(true)}
+					onMouseOut={() => setIsEnterYum(false)}
 				>
-					YumYum{isEnter && "!"}
+					YumYum{isEnterYum && "!"}
 				</S.YumYum>
 				<S.Title>
-					<div className="maintitle">
+					<div
+						className="maintitle"
+						onMouseEnter={() => setIsEnterTitle(true)}
+						onMouseOut={() => setIsEnterTitle(false)}
+					>
 						병천에서 <br /> 든든한 한끼가 <br /> 필요할 때...
+						{isEnterTitle && "!"}
 					</div>
-					{changeTitle(titleIndex)}
+					<CSSTransition
+						in={animationSwitch}
+						timeout={3000}
+						classNames="subtitle"
+					>
+						<div className="subtitle">{subtitle[titleIndex]}</div>
+					</CSSTransition>
 				</S.Title>
-				<S.MainPicture src={food[titleIndex]}></S.MainPicture>
+				<CSSTransition in={animationSwitch} timeout={3000} classNames="foods">
+					<S.MainPicture src={food[titleIndex]}></S.MainPicture>
+				</CSSTransition>
 			</S.FirstPage>
 			<S.SecondPage className="inner">
 				<S.Title>
@@ -165,5 +171,13 @@ const Home = () => {
 		</S.Outer>
 	);
 };
+const subtitle = [
+	"피자가 끌린다!",
+	"햄버거가 끌린다!",
+	"고기가 끌린다!",
+	"빵이 끌린다!",
+	"치킨이 끌린다!",
+	"간식이 끌린다!",
+];
 const food = [pizza, burger, meat, bread, chiken, snack];
 export default Home;
