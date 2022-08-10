@@ -65,7 +65,7 @@ const MapMarkerWrapper = ({
 						setIsVisible(false);
 					}}
 					onClick={() => {
-						showShopDetailHandler(index);
+						setTimeout(() => showShopDetailHandler(index), 101);
 					}}
 				>
 					<CustomOverlayMap

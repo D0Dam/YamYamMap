@@ -96,7 +96,7 @@ const YumYumMap = () => {
 					level={4}
 					onClick={() => {
 						setAnimationYumBox(false);
-						setTimeout(() => setShowShopDetail(null), 199);
+						setTimeout(() => setShowShopDetail(null), 100);
 					}}
 					isPanto={true}
 				>
