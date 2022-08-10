@@ -24,6 +24,17 @@ export const smoothDisappear = keyframes`
   transform: translateY(-5%);
 }
 `;
+
+export const smoothUpDown = keyframes`
+0% {
+	opacity:1;
+	transform: translateY(-30%);
+}
+100%{
+	opacity:1;
+	transform: translateY(0%);
+}
+`;
 export const Outer = styled.div`
 	font-family: "Pretendard700";
 	min-width: 810px;
@@ -123,6 +134,14 @@ export const Title = styled.div`
 		opacity: 0;
 		animation: ${smoothDisappear} 1.4s;
 	}
+`;
+export const ScrollArrow = styled.span`
+	position: absolute;
+	bottom: 0px;
+	right: 50vw;
+	font-size: 48px;
+	animation: ${smoothUpDown} 1.2s infinite alternate;
+	display: ${(props) => (props.showScrollArrow ? `block` : `none`)};
 `;
 export const MainPicture = styled.img`
 	font-family: "Pretendard500";

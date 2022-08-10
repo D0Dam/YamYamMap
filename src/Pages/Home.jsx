@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import * as S from "./Home.styled";
 import { CSSTransition } from "react-transition-group";
+import { MdKeyboardArrowDown } from "react-icons/md";
 import pizza from "../styles/assets/Image/pizza.png";
 import location from "../styles/assets/Image/location.png";
 import delivery from "../styles/assets/Image/delivery.png";
@@ -15,6 +16,7 @@ const Home = () => {
 	const [titleIndex, setTitleIndex] = useState(0);
 	const [isEnterYum, setIsEnterYum] = useState(false);
 	const [isEnterTitle, setIsEnterTitle] = useState(false);
+	const [showScrollArrow, setShowScrollArrow] = useState(true);
 	const [animationSwitch, setAnimationSwitch] = useState(true);
 	const outerDivRef = useRef();
 	useEffect(() => {
@@ -28,6 +30,7 @@ const Home = () => {
 				// 스크롤 내릴 때
 				if (scrollTop >= 0 && scrollTop < pageHeight) {
 					//현재 1페이지
+					setShowScrollArrow(true);
 					outerDivRef.current.scrollTo({
 						top: pageHeight,
 						left: 0,
@@ -35,6 +38,7 @@ const Home = () => {
 					});
 				} else if (scrollTop >= pageHeight && scrollTop < pageHeight * 2) {
 					//현재 2페이지
+					setShowScrollArrow(false);
 					outerDivRef.current.scrollTo({
 						top: pageHeight * 2,
 						left: 0,
@@ -42,6 +46,7 @@ const Home = () => {
 					});
 				} else {
 					// 현재 3페이지
+					setShowScrollArrow(false);
 					outerDivRef.current.scrollTo({
 						top: pageHeight * 2,
 						left: 0,
@@ -52,6 +57,7 @@ const Home = () => {
 				// 스크롤 올릴 때
 				if (scrollTop >= 0 && scrollTop < pageHeight) {
 					//현재 1페이지
+					setShowScrollArrow(true);
 					outerDivRef.current.scrollTo({
 						top: 0,
 						left: 0,
@@ -59,6 +65,7 @@ const Home = () => {
 					});
 				} else if (scrollTop >= pageHeight && scrollTop < pageHeight * 2) {
 					//현재 2페이지
+					setShowScrollArrow(true);
 					outerDivRef.current.scrollTo({
 						top: 0,
 						left: 0,
@@ -66,6 +73,7 @@ const Home = () => {
 					});
 				} else {
 					// 현재 3페이지
+					setShowScrollArrow(true);
 					outerDivRef.current.scrollTo({
 						top: pageHeight,
 						left: 0,
@@ -92,7 +100,6 @@ const Home = () => {
 		setTimeout(() => {
 			if (titleIndex < 5) {
 				setTitleIndex(titleIndex + 1);
-				console.log(titleIndex);
 			} else {
 				setTitleIndex(0);
 			}
@@ -135,6 +142,9 @@ const Home = () => {
 					>
 						<div className="subtitle">{subtitle[titleIndex]}</div>
 					</CSSTransition>
+					<S.ScrollArrow showScrollArrow={showScrollArrow}>
+						<MdKeyboardArrowDown />
+					</S.ScrollArrow>
 				</S.Title>
 				<CSSTransition in={animationSwitch} timeout={3000} classNames="foods">
 					<S.MainPicture src={food[titleIndex]}></S.MainPicture>
