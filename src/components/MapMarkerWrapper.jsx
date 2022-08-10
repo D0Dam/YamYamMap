@@ -13,6 +13,7 @@ const MapMarkerWrapper = ({
 	index,
 	setPositionCenter,
 	fixCenter,
+	setAnimationYumBox,
 }) => {
 	const [coord, setCoord] = useState(null);
 	const [isVisible, setIsVisible] = useState(false);
@@ -66,6 +67,7 @@ const MapMarkerWrapper = ({
 					}}
 					onClick={() => {
 						setTimeout(() => showShopDetailHandler(index), 101);
+						setAnimationYumBox(true);
 					}}
 				>
 					<CustomOverlayMap

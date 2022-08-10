@@ -92,6 +92,7 @@ const YumYumMap = () => {
 						width: "100vw",
 						height: "95vh",
 						minWidth: "1124px",
+						zIndex: "0",
 					}}
 					level={4}
 					onClick={() => {
@@ -111,6 +112,7 @@ const YumYumMap = () => {
 								index={index}
 								setPositionCenter={setPosition}
 								fixCenter={seletedCenter}
+								setAnimationYumBox={setAnimationYumBox}
 							/>
 						))}
 				</Map>
