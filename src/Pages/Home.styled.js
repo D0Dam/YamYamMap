@@ -149,6 +149,7 @@ export const MainPicture = styled.img`
 	background: none;
 	height: 512px;
 	width: 512px;
+	animation: ${smoothAppear} 1.4s;
 `;
 export const Picture = styled.img`
 	font-family: "Pretendard500";

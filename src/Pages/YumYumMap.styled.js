@@ -1,4 +1,26 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+export const smoothAppear = keyframes`
+0% {
+  opacity: 0;
+  transform: translateX(-5%);
+}
+100% {
+  opacity: 1;
+  transform: translateX(0);
+}
+`;
+
+export const smoothDisappear = keyframes`
+0% {
+  opacity: 1;
+  transform: translateX(0%);
+}
+100% {
+  opacity: 0;
+  transform: translateX(-2%);
+}
+`;
 
 export const Navbar = styled.nav`
 	display: flex;
@@ -40,6 +62,20 @@ export const YumContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	font-family: "Pretendard400";
+	.yumbox-enter {
+		opacity: 0;
+	}
+	.yumbox-enter-active {
+		opacity: 1;
+		animation: ${smoothAppear} 0.3s;
+	}
+	.yumbox-exit {
+		opacity: 1;
+		animation: ${smoothDisappear} 0.2s;
+	}
+	.yumbox-exit-active {
+		opacity: 0;
+	}
 `;
 
 export const GoToCenterButton = styled.button`
@@ -54,6 +90,7 @@ export const GoToCenterButton = styled.button`
 	background: white;
 	margin: 0;
 	padding: 0;
+	box-shadow: 0px 0px 4px #f2f2f2;
 	:hover {
 		transition: all 0.2s ease;
 		background: #f2f2f2;

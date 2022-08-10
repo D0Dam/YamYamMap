@@ -77,7 +77,11 @@ const MapMarkerWrapper = ({
 							{isVisible ? (
 								<S.InfoWindowName>{shopData.name}</S.InfoWindowName>
 							) : (
-								<GiPositionMarker color="orange" size={16} />
+								<GiPositionMarker
+									color="orange"
+									size={16}
+									className="orangemarker"
+								/>
 							)}
 						</S.InfoWindow>
 						<S.Blank />

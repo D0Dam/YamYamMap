@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./YumItemDetailBox.styled";
+
 const YumItemDetailBox = ({ shopData, getImage }) => {
 	const [mainImgIndex, setMainImgIndex] = useState(0);
 	useEffect(() => setMainImgIndex(0), [shopData]);

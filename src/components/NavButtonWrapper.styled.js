@@ -4,18 +4,16 @@ export const NavButton = styled.button`
 	font-family: "Pretendard100";
 	color: black;
 	border: none;
-	background: none;
+	background: white;
 	font-size: 16px;
 	width: 100%;
 	height: 100%;
+	transition: all 0.5s ease;
+	border-bottom: 0px solid #feb139;
 	:nth-child(2n-1) {
-		border-bottom: 2px solid #cfd2cf;
-		:hover {
-			border-bottom: 2px solid #f2f2f2;
-		}
+		border-bottom: 3px solid #feb139;
 	}
 	:hover {
-		background: #f2f2f2;
-		transition: all 0.15s linear;
+		border-bottom: 6px solid #feb139;
 	}
 `;

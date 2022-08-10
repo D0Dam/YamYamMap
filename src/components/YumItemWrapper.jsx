@@ -11,6 +11,7 @@ const YumItemWrapper = ({
 	showShopDetailHandler,
 	index,
 	handleCenter,
+	setAnimationYumBox,
 }) => {
 	const [filterCategory, setFilterCategory] = useState(true);
 	const [fixMarker, setFixMarker] = useState(null);
@@ -31,6 +32,7 @@ const YumItemWrapper = ({
 						showShopDetailHandler(index);
 						setFixMarker(true);
 						handleCenter(index);
+						setAnimationYumBox(true);
 					}}
 				>
 					<S.YumTitleImg src={getImage(shopData.image_urls, 0)}></S.YumTitleImg>

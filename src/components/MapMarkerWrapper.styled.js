@@ -1,4 +1,15 @@
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
+
+export const smoothUpDown = keyframes`
+0% {
+	opacity:1;
+	transform: translateY(-15%);
+}
+100%{
+	opacity:1;
+	transform: translateY(0%);
+}
+`;
 
 export const InfoWindow = styled.span`
 	background-color: none;
@@ -21,6 +32,9 @@ export const InfoWindow = styled.span`
 		background-color: white;
 		border-radius: 10px;
 		box-shadow: 0px 0px 6px #ffa500;
+	}
+	.orangemarker {
+		animation: ${smoothUpDown} 1s infinite alternate;
 	}
 `;
 export const MarkerCover = styled.div``;
