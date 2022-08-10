@@ -26,10 +26,6 @@ const YumYumMap = () => {
 			setShopDatas(res.data.shops);
 		});
 	}, []);
-	useEffect(
-		() => console.log(showShopDetail, animationYumBox),
-		[showShopDetail, animationYumBox]
-	);
 	const getImage = (data, num) => {
 		if (data) {
 			return data[num];
