@@ -6,7 +6,7 @@ import "./styles/fonts/Pretendard.css";
 import "./App.css";
 const App = () => {
 	return (
-		<BrowserRouter>
+		<BrowserRouter basename={window.location.pathname || ""}>
 			<Routes>
 				<Route path="/" element={<Home />}></Route>
 				<Route path="YumYumMap" element={<YumYumMap />}></Route>
