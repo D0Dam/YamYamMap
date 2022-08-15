@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/YamYamMap/static/css/main.6baf3c98.css",
+    "main.js": "/YamYamMap/static/js/main.6100a002.js",
+    "static/media/meat.png": "/YamYamMap/static/media/meat.2fb4ddd2aee7f3dfc90f.png",
+    "static/media/location.png": "/YamYamMap/static/media/location.1a4cec349b375e27181f.png",
+    "static/media/bread.png": "/YamYamMap/static/media/bread.33c7aeabc8a530b44aea.png",
+    "static/media/delivery.png": "/YamYamMap/static/media/delivery.cfb15c8b58a1c14f60ff.png",
+    "static/media/chiken.png": "/YamYamMap/static/media/chiken.260587a6d441f9d3fec7.png",
+    "static/media/burger.png": "/YamYamMap/static/media/burger.108d3d11f772957194e6.png",
+    "static/media/snack.png": "/YamYamMap/static/media/snack.3659b6aa4b46824a7e82.png",
+    "static/media/pizza.png": "/YamYamMap/static/media/pizza.c891ec5eb414e8945266.png",
+    "static/media/noImage.png": "/YamYamMap/static/media/noImage.c2f4cbdff33c1abf674e.png",
+    "index.html": "/YamYamMap/index.html",
+    "main.6baf3c98.css.map": "/YamYamMap/static/css/main.6baf3c98.css.map",
+    "main.6100a002.js.map": "/YamYamMap/static/js/main.6100a002.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6baf3c98.css",
+    "static/js/main.6100a002.js"
+  ]
+}
